@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Newtonsoft.Json;
@@ -10,9 +9,7 @@ namespace ApiCiberistas.Controllers;
 [Route("[controller]")]
 public class CiberistasController : ControllerBase
 {
-    string connectionString = "Server=127.0.0.1;Port=3306;Database=Ciberistas;Uid=root;password=Rayo2008;";
-
-    // devuelve todos los libros con todos sus datos
+    string connectionString = "Server=127.0.0.1;Port=3306;Database=Ciberistas;Uid=root;password=Rayo2008;";    // devuelve todos los libros con todos sus datos
     [Route("GetTalleres")]
     [HttpGet]
     public List<Talleres> GetTalleres() {
@@ -22,30 +19,24 @@ public class CiberistasController : ControllerBase
         MySqlCommand cmd = new MySqlCommand();
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.CommandText = "SP_LGG_getTalleres";
-        cmd.Connection = conexion;
-
-        Talleres taller1 = new Talleres();
-        using (var reader = cmd.ExecuteReader()) {
-                if (reader.Read())
-                {
-                    taller1.id_taller = Convert.ToInt32(reader["id_taller"]);
-                    taller1.nombre = reader["nombre"].ToString();
-                    taller1.fecha = DateTime.Parse(reader["fecha"].ToString());
-                    taller1.descripcion = reader["descripcion"].ToString();
-                    taller1.requisitos = reader["requisitos"].ToString();
-                    taller1.modalidad = reader["modalidad"].ToString();
-                    taller1.cupo = Convert.ToInt32(reader["cupo"]);
-                }
+        cmd.Connection = conexion;        using (var reader = cmd.ExecuteReader()) {
+            while (reader.Read())
+            {
+                Talleres taller = new Talleres();
+                taller.id_taller = Convert.ToInt32(reader["id_taller"]);
+                taller.nombre = reader["nombre"]?.ToString() ?? "";
+                taller.fecha = DateTime.Parse(reader["fecha"]?.ToString() ?? DateTime.Now.ToString());
+                taller.descripcion = reader["descripcion"]?.ToString() ?? "";
+                taller.requisitos = reader["requisitos"]?.ToString() ?? "";
+                taller.modalidad = reader["modalidad"]?.ToString() ?? "";
+                taller.cupo = Convert.ToInt32(reader["cupo"]);
+                listaTalleres.Add(taller);
             }
+        }
 
-        cmd.Prepare();
-        cmd.ExecuteNonQuery();
         conexion.Close();
-
         return listaTalleres;
-    }
-
-    [Route("GetTallerConId/{_id}")]
+    }    [Route("GetTallerConId/{_id}")]
     [HttpGet]
     public Talleres GetTallerConId(int _id) {
         Talleres taller = new Talleres();
@@ -56,24 +47,20 @@ public class CiberistasController : ControllerBase
         cmd.CommandText = "SP_LGG_GetTaller";
         cmd.Connection = conexion;
 
-        cmd.Parameters.AddWithValue("@_id", _id);
-        using (var reader = cmd.ExecuteReader()) {
-                if (reader.Read())
-                {
-                    taller.id_taller = Convert.ToInt32(reader["id_taller"]);
-                    taller.nombre = reader["nombre"].ToString();
-                    taller.fecha = DateTime.Parse(reader["fecha"].ToString());
-                    taller.descripcion = reader["descripcion"].ToString();
-                    taller.requisitos = reader["requisitos"].ToString();
-                    taller.modalidad = reader["modalidad"].ToString();
-                    taller.cupo = Convert.ToInt32(reader["cupo"]);
-                }
+        cmd.Parameters.AddWithValue("@_id", _id);        using (var reader = cmd.ExecuteReader()) {
+            if (reader.Read())
+            {
+                taller.id_taller = Convert.ToInt32(reader["id_taller"]);
+                taller.nombre = reader["nombre"]?.ToString() ?? "";
+                taller.fecha = DateTime.Parse(reader["fecha"]?.ToString() ?? DateTime.Now.ToString());
+                taller.descripcion = reader["descripcion"]?.ToString() ?? "";
+                taller.requisitos = reader["requisitos"]?.ToString() ?? "";
+                taller.modalidad = reader["modalidad"]?.ToString() ?? "";
+                taller.cupo = Convert.ToInt32(reader["cupo"]);
             }
+        }
 
-        cmd.Prepare();
-        cmd.ExecuteNonQuery();
         conexion.Close();
-
         return taller;
     }
 
@@ -119,6 +106,22 @@ public class CiberistasController : ControllerBase
         cmd.Prepare();
         cmd.ExecuteNonQuery();
         conexion.Close();
+    }
+
+    // Endpoint de prueba con datos de ejemplo
+    [Route("GetTalleresTest")]
+    [HttpGet]
+    public List<Talleres> GetTalleresTest() {
+        List<Talleres> listaTalleres = new List<Talleres>
+        {
+            new Talleres(1, "Programación Web Básica", DateTime.Now.AddDays(7), "Aprende los fundamentos de HTML, CSS y JavaScript", "Ninguno", "Presencial", 20),
+            new Talleres(2, "Python para Principiantes", DateTime.Now.AddDays(14), "Introducción al lenguaje de programación Python", "Computadora básica", "Virtual", 25),
+            new Talleres(3, "Desarrollo de Apps Móviles", DateTime.Now.AddDays(21), "Crear aplicaciones móviles con React Native", "Conocimientos básicos de programación", "Híbrido", 15),
+            new Talleres(4, "Inteligencia Artificial", DateTime.Now.AddDays(28), "Fundamentos de AI y Machine Learning", "Python básico", "Presencial", 12),
+            new Talleres(5, "Ciberseguridad Básica", DateTime.Now.AddDays(35), "Protege tus datos y aprende sobre seguridad digital", "Ninguno", "Virtual", 30)
+        };
+
+        return listaTalleres;
     }
 
     

@@ -1,11 +1,11 @@
 public class Talleres
 {
 	public int id_taller {get;set;}
-	public string nombre {get;set;}
+	public string nombre {get;set;} = "";
 	public DateTime fecha {get;set;}
-	public string descripcion {get;set;}
-	public string requisitos {get;set;}
-	public string modalidad {get;set;}
+	public string descripcion {get;set;} = "";
+	public string requisitos {get;set;} = "";
+	public string modalidad {get;set;} = "";
 	public int cupo {get;set;}
 
 	public Talleres(){
