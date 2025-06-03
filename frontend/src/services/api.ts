@@ -12,6 +12,31 @@ export interface Workshop {
   capacity: number;
 }
 
+export interface WorkshopRegistration {
+  id_taller: number;
+  nombre_completo: string;
+  email: string;
+  telefono: string;
+  edad: number;
+  nivel_educativo: string;
+  experiencia: string;
+  motivacion?: string;
+}
+
+export interface Registration {
+  id_inscripcion: number;
+  id_taller: number;
+  nombre_completo: string;
+  email: string;
+  telefono: string;
+  edad: number;
+  nivel_educativo: string;
+  experiencia: string;
+  motivacion: string;
+  fecha_inscripcion: string;
+  estado: string;
+}
+
 // API configuration using environment variables
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5211';
 
@@ -163,3 +188,51 @@ export const getTalleres = fetchWorkshops;
 export const crearTaller = createWorkshop;
 export const getTallerPorId = fetchWorkshopById;
 export const modificarTaller = updateWorkshop;
+
+/**
+ * Create a new workshop registration using .NET API
+ */
+export async function createWorkshopRegistration(registration: WorkshopRegistration): Promise<{ message: string; id_inscripcion: number }> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/Ciberistas/CrearInscripcion`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(registration)
+    });
+    
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || `API error: ${res.status}`);
+    }
+    
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error creating workshop registration:', error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch all registrations for a specific workshop using .NET API
+ */
+export async function fetchWorkshopRegistrations(id_taller: number): Promise<Registration[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/Ciberistas/GetInscripciones/${id_taller}`);
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`);
+    }
+    const data = await res.json();
+    
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error(`Error fetching registrations for workshop ${id_taller}:`, error);
+    throw error;
+  }
+}
+
+// Registration function aliases
+export const inscribirseATaller = createWorkshopRegistration;
+export const getInscripcionesTaller = fetchWorkshopRegistrations;

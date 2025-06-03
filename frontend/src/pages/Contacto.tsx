@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar } from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { 
   Mail, 
@@ -64,6 +65,7 @@ const Contacto = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <Navbar />
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">

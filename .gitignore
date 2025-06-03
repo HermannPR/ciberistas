@@ -1,3 +1,7 @@
+# ===============================
+# NODE.JS / FRONTEND
+# ===============================
+
 # Logs
 logs
 *.log
@@ -7,18 +11,139 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+.next/
+out/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vite
 *.local
+.vite/
+
+# Bundle analyzer
+bundle-analyzer-report.html
+
+# ===============================
+# .NET / BACKEND
+# ===============================
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+*.pid
+*.runtimeconfig.json
+*.deps.json
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Entity Framework
+*.edmx.diagram
+*.edmx.designer.cs
+
+# ===============================
+# DATABASE
+# ===============================
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# MySQL dumps
+*.sql.backup
+dump.sql
+
+# ===============================
+# TEMPORAL FILES (TESTING)
+# ===============================
+
+# Script temporal de desarrollo
+start-dev.ps1
+
+# ===============================
+# SYSTEM FILES
+# ===============================
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Desktop.ini
+$RECYCLE.BIN/
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# ===============================
+# PROJECT SPECIFIC
+# ===============================
+
+# Archivos de configuración local
+appsettings.Development.json
+
+# Archivos de logs del proyecto
+*.log.*
+
+# Archivos de respaldo
+*.backup

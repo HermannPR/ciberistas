@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getTalleres, Workshop } from "@/services/api";
 import { WorkshopCard } from "@/components/WorkshopCard";
+import { Navbar } from "@/components/Navbar";
 import { toast } from "@/hooks/use-toast";
 import { BookOpen, Code2, Users, Sparkles } from "lucide-react";
 
@@ -33,6 +34,7 @@ export default function Workshops() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-purple-50">
+      <Navbar />
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-500 via-green-500 to-purple-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Workshop } from "@/services/api";
 import { Calendar, Users, MapPin, ArrowRight, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WorkshopRegistrationModal } from "@/components/WorkshopRegistrationModal";
 
 interface WorkshopCardProps {
   workshop: Workshop;
 }
 
 export function WorkshopCard({ workshop }: WorkshopCardProps) {
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  
   // Format date if it exists
   const formattedDate = workshop.date 
     ? new Date(workshop.date).toLocaleDateString('es-MX', {
@@ -87,12 +90,20 @@ export function WorkshopCard({ workshop }: WorkshopCardProps) {
 
         {/* CTA Button */}
         <Button 
+          onClick={() => setIsRegistrationOpen(true)}
           className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg"
         >
-          <span>Más información</span>
+          <span>Inscribirme al Taller</span>
           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
+
+      {/* Registration Modal */}
+      <WorkshopRegistrationModal
+        workshop={workshop}
+        isOpen={isRegistrationOpen}
+        onClose={() => setIsRegistrationOpen(false)}
+      />
     </div>
   );
 }
