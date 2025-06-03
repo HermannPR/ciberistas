@@ -106,23 +106,5 @@ public class CiberistasController : ControllerBase
         cmd.Prepare();
         cmd.ExecuteNonQuery();
         conexion.Close();
-    }
-
-    // Endpoint de prueba con datos de ejemplo
-    [Route("GetTalleresTest")]
-    [HttpGet]
-    public List<Talleres> GetTalleresTest() {
-        List<Talleres> listaTalleres = new List<Talleres>
-        {
-            new Talleres(1, "Programación Web Básica", DateTime.Now.AddDays(7), "Aprende los fundamentos de HTML, CSS y JavaScript", "Ninguno", "Presencial", 20),
-            new Talleres(2, "Python para Principiantes", DateTime.Now.AddDays(14), "Introducción al lenguaje de programación Python", "Computadora básica", "Virtual", 25),
-            new Talleres(3, "Desarrollo de Apps Móviles", DateTime.Now.AddDays(21), "Crear aplicaciones móviles con React Native", "Conocimientos básicos de programación", "Híbrido", 15),
-            new Talleres(4, "Inteligencia Artificial", DateTime.Now.AddDays(28), "Fundamentos de AI y Machine Learning", "Python básico", "Presencial", 12),
-            new Talleres(5, "Ciberseguridad Básica", DateTime.Now.AddDays(35), "Protege tus datos y aprende sobre seguridad digital", "Ninguno", "Virtual", 30)
-        };
-
-        return listaTalleres;
-    }
-
-    
+    }    
 }

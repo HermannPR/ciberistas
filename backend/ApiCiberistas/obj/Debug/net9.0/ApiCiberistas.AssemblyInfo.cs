@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiCiberistas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1b941f61d9d2aaf472b540f819ae16d5a457b0a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+083ebe1be910cb218a98f408c7644a4590d64b28")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiCiberistas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiCiberistas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -20,7 +20,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5211';
  */
 export async function fetchWorkshops(): Promise<Workshop[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/Ciberistas/GetTalleresTest`);
+    const res = await fetch(`${API_BASE_URL}/Ciberistas/GetTalleres`);
     if (!res.ok) {
       throw new Error(`API error: ${res.status}`);
     }
